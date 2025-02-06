@@ -1,0 +1,19 @@
+
+body {
+    font-family: "Roboto Slab", serif;
+    font-weight: 300;
+    font-style: normal;
+    color: #8B7969;
+}
+
+.header__inner {
+    font-family: "Roboto Slab", serif;
+    font-weight: 400;
+    font-style: normal;
+    margin: 0;
+    padding: 20px 0;
+    max-width: 100%;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+    font-size: 32px;
+}

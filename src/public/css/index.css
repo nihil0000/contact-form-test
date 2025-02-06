@@ -1,0 +1,155 @@
+.contact__title {
+    margin: 40px 0;
+    text-align: center;
+    font-size: 30px;
+}
+
+/* form common */
+.contact__form {
+    margin: 0 auto;
+    max-width: 1230px;
+}
+
+.form__body {
+    margin: 0 auto;
+    width: 70%;
+}
+
+.form__group {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.label__text--required {
+    color: red;
+}
+
+.form__group-item {
+    width: 60%;
+}
+
+.form__group-item input, select, textarea{
+    padding: 10px;
+    border: none;
+    background: #f4f4f4;
+    color: #BEB1A6;
+}
+
+/* .tel-input inputに関しては、このスタイルを適応しない */
+input:not(.tel-input input)::placeholder, textarea::placeholder {
+    padding-left: 1em;
+    color: #BEB1A6;
+}
+
+/* name */
+.name-input__inner {
+    display: flex;
+    justify-content: space-between;
+}
+
+.name-input {
+    width: 45%;
+}
+
+/* sex */
+.radio-group {
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+}
+
+.radio-group input {
+    display: none;
+}
+
+.radio-mark {
+    display: inline-block;
+    border: 2px solid #8B7969;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+}
+
+.radio-group input:checked + .radio-mark{
+    background: #8B7969;
+    border-color: #8B7969;
+}
+
+.radio-group label {
+    padding: 0 50px 0 5px;
+}
+
+/* email */
+.email-input {
+    width: 100%;
+}
+
+.email-input:-webkit-autofill {
+    -webkit-text-fill-color: #BEB1A6; /* フォーム内のテキストの色を固定 */
+    -webkit-box-shadow: 0 0 0px 1000px #f4f4f4 inset;
+}
+
+/* tel */
+.tel-input {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.tel-input input {
+    text-align: center;
+    color: #BEB1A6;
+}
+
+/* address */
+.address-input {
+    width: 100%;
+}
+
+/* building name */
+.building-name-input {
+    width: 100%;
+}
+
+/* contact type */
+.custom-select {
+    position: relative;
+    display: inline-block;
+    width: 60%;
+}
+
+.contact-type-select {
+    padding-left: 1.5em;
+    width: 100%;
+    color: #d9d0c9;
+    appearance: none;
+}
+
+/* ▼ toggle button */
+.custom-select::after {
+    content: "▼"; /* 逆三角形 */
+    font-size: 16px;
+    color: #8B7969;
+    position: absolute;
+    right: 10px; /* `select` の右端から10pxの位置 */
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none; /* クリックを select に通す */
+}
+
+/* contact content */
+.contact-content-input {
+    width: 100%;
+    min-height: 100px;
+}
+
+/* confirm button */
+.confirm-button {
+    display: block;
+    margin: 0 auto;
+    padding: 7px 30px;
+    background: #82756A;
+    color: #fff;
+    border: none;
+}
