@@ -10,7 +10,7 @@
 
     <div class="contact__form">
         <form action="/confirm" class="form__body" method="post">
-            <!-- name -->
+            <!-- input name -->
             <div class="form__group">
                 <div class="form__group-label">
                     <span class="label__text">お名前</span>
@@ -24,7 +24,7 @@
                 </div>
             </div>
 
-            <!-- sex -->
+            <!-- input gender -->
             <div class="form__group">
                 <div class="form__group-label">
                     <span class="label__text">性別</span>
@@ -47,7 +47,7 @@
                 </div>
             </div>
 
-            <!-- email -->
+            <!-- input email -->
             <div class="form__group">
                 <div class="form__group-label">
                     <span class="label__text">メールアドレス</span>
@@ -58,7 +58,7 @@
                 </div>
             </div>
 
-            <!-- tel -->
+            <!-- input tel -->
             <div class="form__group">
                 <div class="form__group-label">
                     <span class="label__text">電話番号</span>
@@ -73,7 +73,7 @@
                 </div>
             </div>
 
-            <!-- address -->
+            <!-- input address -->
             <div class="form__group">
                 <div class="form__group-label">
                     <span class="label__text">住所</span>
@@ -84,7 +84,7 @@
                 </div>
             </div>
 
-            <!-- building name -->
+            <!-- input building name -->
             <div class="form__group">
                 <div class="form__group-label">
                     <span class="label__text">建物名</span>
@@ -95,7 +95,7 @@
                 </div>
             </div>
 
-            <!-- contact type -->
+            <!-- option to select contact type -->
             <div class="form__group">
                 <div class="form__group-label">
                     <span class="label__text">お問い合わせの種類</span>
@@ -111,7 +111,7 @@
                 </div>
             </div>
 
-            <!-- contact content -->
+            <!-- input contact content -->
             <div class="form__group">
                 <div class="form__group-label">
                     <span class="label__text">お問い合わせ内容</span>
