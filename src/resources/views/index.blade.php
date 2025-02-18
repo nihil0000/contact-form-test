@@ -9,7 +9,8 @@
     <p class="contact__title">Contact</p>
 
     <div class="contact__form">
-        <form action="/confirm" class="form__body" method="post">
+        <form action="{{ route('confirm') }}" class="form__body" method="post" novalidate>
+            @csrf
             <!-- input name -->
             <div class="form__group">
                 <div class="form__group-label">
@@ -17,32 +18,43 @@
                     <span class="label__text--required">※</span>
                 </div>
                 <div class="form__group-item">
-                    <div class="name-input__inner">
-                        <input type="text" class="name-input" name="last_name" placeholder="例: 山田">
-                        <input type="text" class="name-input" name="first_name" placeholder="例: 太郎">
+                    <div class="name-input__wrapper">
+                        <input type="text" class="name-input" name="last_name" placeholder="例: 山田" value="{{ old('last_name') }}">
+                        @error('last_name')
+                            <p class="form__error-msg">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    <div class="name-input__wrapper">
+                        <input type="text" class="name-input" name="first_name" placeholder="例: 太郎" value="{{ old('first_name') }}">
+                        @error('first_name')
+                            <p class="form__error-msg">{{ $message }}</p>
+                        @enderror
                     </div>
                 </div>
             </div>
 
-            <!-- input gender -->
+            <!-- radio gender -->
             <div class="form__group">
                 <div class="form__group-label">
                     <span class="label__text">性別</span>
                     <span class="label__text--required">※</span>
                 </div>
-                <div class="form__group-item">
-                    <div class="radio-group">
-                        <input type="radio" id="male" name="gender" value="male">
-                        <span class="radio-mark"></span>
-                        <label for="male">男性</label>
-
-                        <input type="radio" id="female" name="gender" value="female">
-                        <span class="radio-mark"></span>
-                        <label for="female">女性</label>
-
-                        <input type="radio" id="other" name="gender" value="other">
-                        <span class="radio-mark"></span>
-                        <label for="other">その他</label>
+                <div class="gender-radio__wrapper">
+                    <div class="gender-radio">
+                        <div class="radio-group">
+                            <!-- $genders from AppServiceProvider -->
+                            @foreach ($genders as $key => $value)
+                                <input type="radio" id="gender_{{ $key }}" name="gender" value="{{ $value }}" {{ old('gender', '男性') == $value ? 'checked' : ''}}>
+                                <label for="gender_{{ $key }}">
+                                    <span class="radio-mark"></span>{{ $value }}
+                                </label>
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="gender-form__error">
+                        @error('gender')
+                            <p class="form__error-msg">{{ $message }}</p>
+                        @enderror
                     </div>
                 </div>
             </div>
@@ -53,8 +65,15 @@
                     <span class="label__text">メールアドレス</span>
                     <span class="label__text--required">※</span>
                 </div>
-                <div class="form__group-item">
-                    <input type="email" class="email-input" name="email" placeholder="例: test@example.com">
+                <div class="email-input__wrapper">
+                    <div class="email-input">
+                        <input type="email" name="email" placeholder="例: test@example.com" value="{{ old('email') }}">
+                    </div>
+                    <div class="email-form__error">
+                        @error('email')
+                            <p class="form__error-msg">{{ $message }}</p>
+                        @enderror
+                    </div>
                 </div>
             </div>
 
@@ -64,11 +83,16 @@
                     <span class="label__text">電話番号</span>
                     <span class="label__text--required">※</span>
                 </div>
-                <div class="form__group-item">
+                <div class="tel-input__wrapper">
                     <div class="tel-input">
-                        <input type="tel" name="tel1" maxlength="3" placeholder="080"> -
-                        <input type="tel" name="tel2" maxlength="4" placeholder="1234"> -
-                        <input type="tel" name="tel3" maxlength="4" placeholder="5678">
+                        <input type="tel" name="tel_area_code" placeholder="080" value="{{ old('tel_area_code') }}"> -
+                        <input type="tel" name="tel_city_code" placeholder="1234" value="{{ old('tel_city_code') }}"> -
+                        <input type="tel" name="tel_subscriber" placeholder="5678" value="{{ old('tel_subscriber') }}">
+                    </div>
+                    <div class="tel-form__error">
+                        @error('tel')
+                            <p class="form__error-msg">{{ $message }}</p>
+                        @enderror
                     </div>
                 </div>
             </div>
@@ -79,8 +103,15 @@
                     <span class="label__text">住所</span>
                     <span class="label__text--required">※</span>
                 </div>
-                <div class="form__group-item">
-                    <input type="text" class="address-input" name="address" placeholder="例: 東京都渋谷区千駄ヶ谷1-2-3">
+                <div class="address-input__wrapper">
+                    <div class="address-input">
+                        <input type="text" name="address" placeholder="例: 東京都渋谷区千駄ヶ谷1-2-3" value="{{ old('address') }}">
+                    </div>
+                    <div class="address-form__error">
+                        @error('address')
+                            <p class="form__error-msg">{{ $message }}</p>
+                        @enderror
+                    </div>
                 </div>
             </div>
 
@@ -88,10 +119,9 @@
             <div class="form__group">
                 <div class="form__group-label">
                     <span class="label__text">建物名</span>
-                    <span class="label__text--required">※</span>
                 </div>
                 <div class="form__group-item">
-                    <input type="text" class="building-name-input" name="building_name" placeholder="例: 千駄ヶ谷マンション101">
+                    <input type="text" class="building-name-input" name="building" placeholder="例: 千駄ヶ谷マンション101" value="{{ old('building') }}">
                 </div>
             </div>
 
@@ -101,24 +131,38 @@
                     <span class="label__text">お問い合わせの種類</span>
                     <span class="label__text--required">※</span>
                 </div>
-                <div class="form__group-item">
+                <div class="contact-type-select__wrapper">
                     <div class="custom-select">
                         <select name="contact_type" class="contact-type-select">
                             <option value="">選択してください</option>
-                            {{-- <!-- @foreach () --> --}}
+                            @foreach ($content as $contact_type)
+                                <option value="{{ $contact_type }}"  {{ old('contact_type') == $contact_type ? 'selected' : '' }}>{{ $contact_type }}</option>
+                            @endforeach
                         </select>
+                    </div>
+                    <div class="contact-type-form_error">
+                        @error('contact_type')
+                            <p class="form__error-msg">{{ $message }}</p>
+                        @enderror
                     </div>
                 </div>
             </div>
 
-            <!-- input contact content -->
+            <!-- input contact detail -->
             <div class="form__group">
                 <div class="form__group-label">
                     <span class="label__text">お問い合わせ内容</span>
                     <span class="label__text--required">※</span>
                 </div>
-                <div class="form__group-item">
-                    <textarea class="contact-content-input" name="contact_content" placeholder="お問い合わせ内容をご記載ください"></textarea>
+                <div class="detail-form-input__wrapper">
+                    <div class="detail-input">
+                        <textarea name="detail" placeholder="お問い合わせ内容をご記載ください">{{ old('detail') }}</textarea>
+                    </div>
+                    <dev class="detail-form__error">
+                        @error('detail')
+                            <p class="form__error-msg">{{ $message }}</p>
+                        @enderror
+                    </dev>
                 </div>
             </div>
 

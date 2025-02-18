@@ -18,7 +18,7 @@ class ContactFactory extends Factory
     public function definition()
     {
         return [
-            'category_id' => Category::inRandomOrder()->first()->id ?? Category::factory()->create()->id, // ✅ 外部キーを適切に取得 // 外部キーをランダム取得 or 新規作成
+            'category_id' => Category::inRandomOrder()->first()->id ?? Category::factory()->create()->id, // 外部キーを適切に取得
             'first_name' => $this->faker->firstName,
             'last_name' => $this->faker->lastName,
             'gender' => $this->faker->randomElement([1, 2, 3]),
