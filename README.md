@@ -24,7 +24,7 @@
 - MySQL 8.0.26
 
 ## ER図
-
+<img src="images/er.png" alt="ER図" width="500">
 
 ## URL
 - 開発環境
