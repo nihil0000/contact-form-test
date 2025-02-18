@@ -6,9 +6,10 @@
 
 @section('content')
 <main class="thanks">
-    <p class="thanks__title">お問い合わせありがとうございました</p>
+    <h1 class="thanks-bg-txt">Thank you</h1>
+    <h2 class="thanks-ttl">お問い合わせありがとうございました</h2>
 
-    <a href="/" class="btn-home">HOME</a>
+    <input type="button" value="HOME" onclick="location.href='/'">
     </div>
 </main>
 @endsection
