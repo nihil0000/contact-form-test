@@ -15,42 +15,46 @@ use App\Http\Controllers\AuthController;
 |
 */
 
-// register page
+/**
+ * index
+ */
+Route::get('/', [ContactController::class, 'index'])->name('index');
+
+/**
+ * register
+ */
 Route::get('/register', function () {
     return view('register');
-})->name('register');
+})->name('register'); // registre page
+Route::post('register', [AuthController::class, 'register']); // register action
 
-// register
-Route::post('register', [AuthController::class, 'register']);
-
-// login page
+/**
+ * login
+ */
 Route::get('/login', function () {
     return view('login');
-})->name('login');
+})->name('login'); // login page
+Route::post('/login', [AuthController::class, 'login']); // login action
 
-// login
-Route::post('/login', [AuthController::class, 'login']);
+/**
+ * admin
+ * 未ログイン状態の場合、loginページに遷移する
+ */
+Route::get('/admin', [ContactController::class, 'search'])->middleware('auth')->name('admin'); // admin page
+Route::delete('/admin', [ContactController::class, 'destroy']); // delete contact
+Route::get('/admin/export', [ContactController::class, 'export'])->name('admin.export'); // export csv
 
-/*
-admin page
-未ログイン状態の場合、loginページに遷移する
-*/
-Route::get('/admin', function () {
-    return view('admin');
-})->middleware('auth')->name('admin');
-
-// logout
+/**
+ * logout
+ */
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
-// TODO: controllerを使用してviewを返す
-Route::get('/confirm', function () {
-    return view('/confirm');
-})->name('confirm');
+/**
+ * confirm
+ */
+Route::post('/confirm', [ContactController::class, 'confirm'])->name('confirm');
 
-// TODO: controllerを使用してviewを返す
-Route::get('/thanks', function () {
-    return view('/thanks');
-})->name('thanks');
-
-
-Route::get('/', [ContactController::class, 'index']);
+/**
+ * thanks
+ */
+Route::post('/thanks', [ContactController::class, 'store'])->name('thanks');
