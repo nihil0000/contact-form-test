@@ -10,7 +10,7 @@
 ＊開発環境がMacOS (Appleチップ) のため、MySQLにて`platform: linux/amd64`を指定しています
 
 ### Laravel開発環境
-1. docker compose exex php bash
+1. docker compose exec php bash
 2. composer install
 3. `cp .env.example .env`を行い、環境変数を変更
     1. `DB_HOST=mysql`, `DB_DATABASE=laravel_db`, `DB_USERNAME=laravel_user`, `DB_PASSWORD=laravel_pass`
