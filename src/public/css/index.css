@@ -40,13 +40,18 @@
     padding: 10px;
     border: none;
     background: #f4f4f4;
-    color: #BEB1A6;
+    color: #5f5852;
 }
 
 /* .tel-input inputに関しては、このスタイルを適応しない */
-input:not(.tel-input input)::placeholder,
+input::placeholder,
 textarea::placeholder {
-    color: #BEB1A6;
+color: #7c736b;
+}
+
+input:-webkit-autofill {
+    -webkit-text-fill-color: #7c736b; /* オートフィル時のテキスト色を制御 */
+    -webkit-box-shadow: 0 0 0px 1000px #f4f4f4 inset; /* オートフィル時の背景色を制御 */
 }
 
 .form__error-msg {
@@ -114,12 +119,7 @@ textarea::placeholder {
     width: 100%;
     border: none;
     background: #f4f4f4;
-    color: #BEB1A6;
-}
-
-.email-input:-webkit-autofill {
-    -webkit-text-fill-color: #BEB1A6; /* フォーム内のテキストの色を固定 */
-    -webkit-box-shadow: 0 0 0px 1000px #f4f4f4 inset;
+    color: #7c736b;
 }
 
 
@@ -136,12 +136,16 @@ textarea::placeholder {
 
 .tel-input input {
     padding: 10px;
+    width: 30%;
     text-align: center;
-    color: #BEB1A6;
+    color: #7c736b;
     background: #f4f4f4;
     border: none;
 }
 
+.tel-input input::placeholder {
+    color: a5998f;
+}
 
 /* address */
 .address-input__wrapper {
@@ -151,7 +155,7 @@ textarea::placeholder {
 .address-input input {
     padding: 10px;
     width: 100%;
-    color: #BEB1A6;
+    color: #7c736b;
     background: #f4f4f4;
     border: none;
 }
@@ -168,7 +172,6 @@ textarea::placeholder {
     width: 60%;
 }
 
-
 .custom-select {
     position: relative;
     display: inline-block;
@@ -181,7 +184,16 @@ textarea::placeholder {
     appearance: none;
     border: none;
     background: #f4f4f4;
-    color: #c1b2a9;
+}
+
+/* text color when not selected */
+.contact-type-select:invalid {
+    color: #b7b0ac;
+}
+
+/* text color when selected */
+.contact-type-select:valid {
+    color: #48433e;
 }
 
 /* ▼ toggle button */
@@ -208,7 +220,7 @@ textarea::placeholder {
     min-height: 100px;
     border: none;
     background: #f4f4f4;
-    color: #BEB1A6;
+    color: #48433e;
 }
 
 
