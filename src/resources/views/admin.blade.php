@@ -23,7 +23,7 @@
                 <div class="search-item">
                     <select name="gender" id="" class="select-gender">
                         <option value="">性別</option>
-                        @foreach ($genders as $key => $value)
+                        @foreach (config('genders') as $key => $value)
                             <option value="{{ $key }}">{{ $value }}</option>
                         @endforeach
                     </select>
@@ -74,7 +74,7 @@
                 @foreach ($contacts as $contact)
                 <tr>
                     <td>{{ $contact['last_name'] . ' '  .$contact['first_name'] }}</td>
-                    <td>{{ $genders[$contact['gender']] }}</td>
+                    <td>{{ $contact['gender'] }}</td>
                     <td>{{ $contact['email'] }}</td>
                     <td>{{ $categories[$contact['category_id']] }}</td>
                     <td>
@@ -99,7 +99,7 @@
                     </tr>
                     <tr>
                         <th>性別</th>
-                        <td>{{ $genders[$contact['gender']] }}</td>
+                        <td>{{ $contact['gender'] }}</td>
                     </tr>
                     <tr>
                         <th>メールアドレス</th>

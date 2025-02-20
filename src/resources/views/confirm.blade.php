@@ -37,8 +37,8 @@
                     </th>
                     <td>
                         <div class="form__group-item">
-                            <input type="test" value="{{ $contacts['gender'] }}" readonly>
-                            <input type="hidden" name="gender" value="{{ array_search($contacts['gender'], $genders) }}">
+                            <input type="text" value="{{ config('genders')[$contacts['gender']] ?? '未設定' }}" readonly>
+                            <input type="hidden" name="gender" value="{{ $contacts['gender'] }}">
                         </div>
                     </td>
                 </tr>
@@ -52,7 +52,7 @@
                     </th>
                     <td>
                         <div class="form__group-item">
-                            <input type="test" name="email" value="{{ $contacts['email'] }}" readonly>
+                            <input type="text" name="email" value="{{ $contacts['email'] }}" readonly>
                         </div>
                     </td>
                 </tr>
@@ -108,9 +108,8 @@
                     </th>
                     <td>
                         <div class="form__group-item">
-                            <input type="text" value="{{ $contacts['contact_type'] }}" readonly>
-                            <!-- $categories from AppServiceProvider -->
-                            <input type="hidden" name="category_id" value="{{ array_search($contacts['contact_type'], $categories) }}">
+                            <input type="text" value="{{ config('categories')[$contacts['contact_type']] }}" readonly>
+                            <input type="hidden" name="category_id" value="{{ $contacts['contact_type'] }}">
                         </div>
                     </td>
                 </tr>

@@ -24,18 +24,18 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::share('genders', [
-            1 => '男性',
-            2 => '女性',
-            3 => 'その他',
-        ]);
+        // View::share('genders', [
+        //     1 => '男性',
+        //     2 => '女性',
+        //     3 => 'その他',
+        // ]);
 
-        View::share('categories', [
-            1 => '商品のお届けについて',
-            2 => '商品の交換について',
-            3 => '商品トラブル',
-            4 => 'ショップへのお問い合わせ',
-            5 => 'その他',
-        ]);
+        // View::share('categories', [
+        //     1 => '商品のお届けについて',
+        //     2 => '商品の交換について',
+        //     3 => '商品トラブル',
+        //     4 => 'ショップへのお問い合わせ',
+        //     5 => 'その他',
+        // ]);
     }
 }

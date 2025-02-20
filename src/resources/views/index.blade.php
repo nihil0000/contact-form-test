@@ -42,9 +42,8 @@
                 <div class="gender-radio__wrapper">
                     <div class="gender-radio">
                         <div class="radio-group">
-                            <!-- $genders from AppServiceProvider -->
-                            @foreach ($genders as $key => $value)
-                                <input type="radio" id="gender_{{ $key }}" name="gender" value="{{ $value }}" {{ old('gender', '男性') == $value ? 'checked' : ''}}>
+                            @foreach (config('genders') as $key => $value)
+                                <input type="radio" id="gender_{{ $key }}" name="gender" value="{{ $key }}" {{ old('gender', 1) == $key ? 'checked' : ''}}>
                                 <label for="gender_{{ $key }}">
                                     <span class="radio-mark"></span>{{ $value }}
                                 </label>
@@ -133,10 +132,10 @@
                 </div>
                 <div class="contact-type-select__wrapper">
                     <div class="custom-select">
-                        <select name="contact_type" class="contact-type-select">
-                            <option value="">選択してください</option>
-                            @foreach ($content as $contact_type)
-                                <option value="{{ $contact_type }}"  {{ old('contact_type') == $contact_type ? 'selected' : '' }}>{{ $contact_type }}</option>
+                        <select name="contact_type" class="contact-type-select" required>
+                            <option value="" disabled {{ old('contact_type') ? '' : 'selected' }}>選択してください</option>
+                            @foreach ($categories as $key => $value)
+                                <option value="{{ $key }}" {{ old('contact_type') == $key ? 'selected' : '' }}>{{ $value }}</option>
                             @endforeach
                         </select>
                     </div>
