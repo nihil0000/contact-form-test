@@ -12,9 +12,9 @@ class ContactController extends Controller
 {
     public function index()
     {
-        $content = Category::pluck('content');
+        $categories = Category::pluck('content', 'id');
 
-        return view('index', compact('content'));
+        return view('index', compact('categories'));
     }
 
     public function confirm(ContactRequest $request)
@@ -35,9 +35,7 @@ class ContactController extends Controller
 
     public function search(Request $request)
     {
-        // $contacts = Contact::Paginate(7);
-
-        // return view('admin', compact('contacts'));
+        $categories = Category::pluck('id', 'content');
 
         // 検索クエリを適用
         $contacts = Contact::query()
@@ -47,7 +45,7 @@ class ContactController extends Controller
             ->filterByDate($request->contact_date)
             ->paginate(7);
 
-        return view('admin', compact('contacts'));
+        return view('admin', compact('contacts', 'categories'));
     }
 
     public function destroy(Request $request)
