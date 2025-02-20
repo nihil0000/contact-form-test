@@ -53,6 +53,7 @@ Route::post('logout', [AuthController::class, 'logout'])->name('logout');
  * confirm
  */
 Route::post('/confirm', [ContactController::class, 'confirm'])->name('confirm');
+Route::post('/edit', [ContactController::class, 'edit'])->name('edit');
 
 /**
  * thanks

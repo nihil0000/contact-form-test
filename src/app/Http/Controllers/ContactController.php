@@ -10,6 +10,7 @@ use App\Models\Contact;
 
 class ContactController extends Controller
 {
+    // input contact
     public function index()
     {
         $categories = Category::pluck('content', 'id');
@@ -17,6 +18,7 @@ class ContactController extends Controller
         return view('index', compact('categories'));
     }
 
+    // confirm contact content
     public function confirm(ContactRequest $request)
     {
         $contacts = $request->all();
@@ -24,6 +26,13 @@ class ContactController extends Controller
         return view('confirm', compact('contacts'));
     }
 
+    // edit contact content
+    public function edit(Request $request)
+    {
+        return redirect()->route('index')->withInput();
+    }
+
+    // store contact content
     public function store(Request $request)
     {
         $contacts = $request->all();
@@ -33,6 +42,7 @@ class ContactController extends Controller
         return view('thanks');
     }
 
+    // search contact content
     public function search(Request $request)
     {
         $categories = Category::pluck('id', 'content');
@@ -48,6 +58,7 @@ class ContactController extends Controller
         return view('admin', compact('contacts', 'categories'));
     }
 
+    // delete contact content
     public function destroy(Request $request)
     {
         Contact::find($request->id)->delete();
@@ -55,6 +66,7 @@ class ContactController extends Controller
         return redirect('admin');
     }
 
+    // export contact content
     public function export(Request $request)
     {
         // 検索条件を適用

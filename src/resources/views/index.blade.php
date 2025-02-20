@@ -132,15 +132,15 @@
                 </div>
                 <div class="contact-type-select__wrapper">
                     <div class="custom-select">
-                        <select name="contact_type" class="contact-type-select" required>
-                            <option value="" disabled {{ old('contact_type') ? '' : 'selected' }}>選択してください</option>
+                        <select name="category_id" class="contact-type-select" required>
+                            <option value="" disabled {{ old('category_id') ? '' : 'selected' }}>選択してください</option>
                             @foreach ($categories as $key => $value)
-                                <option value="{{ $key }}" {{ old('contact_type') == $key ? 'selected' : '' }}>{{ $value }}</option>
+                                <option value="{{ $key }}" {{ old('category_id') == $key ? 'selected' : '' }}>{{ $value }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="contact-type-form_error">
-                        @error('contact_type')
+                        @error('category_id')
                             <p class="form__error-msg">{{ $message }}</p>
                         @enderror
                     </div>

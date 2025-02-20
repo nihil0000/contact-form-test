@@ -67,6 +67,9 @@
                     <td>
                         <div class="form__group-item">
                             <input type="tel" name="tel" value="{{ $contacts['tel_area_code'] . $contacts['tel_city_code'] . $contacts['tel_subscriber'] }}" readonly>
+                            <input type="hidden" name="tel_area_code" value="{{ $contacts['tel_area_code'] }}">
+                            <input type="hidden" name="tel_city_code" value="{{ $contacts['tel_city_code'] }}">
+                            <input type="hidden" name="tel_subscriber" value="{{ $contacts['tel_subscriber'] }}">
                         </div>
                     </td>
                 </tr>
@@ -108,8 +111,8 @@
                     </th>
                     <td>
                         <div class="form__group-item">
-                            <input type="text" value="{{ config('categories')[$contacts['contact_type']] }}" readonly>
-                            <input type="hidden" name="category_id" value="{{ $contacts['contact_type'] }}">
+                            <input type="text" value="{{ config('categories')[$contacts['category_id']] }}" readonly>
+                            <input type="hidden" name="category_id" value="{{ $contacts['category_id'] }}">
                         </div>
                     </td>
                 </tr>
@@ -131,7 +134,8 @@
 
             <div class="button__wrapper">
                 <button class="submit-btn">送信</button>
-                <a href="/" class="edit-btn">修正</a>
+
+                <button type="submit" class="edit-btn" formaction="{{ route('edit') }}">修正</button>
             </div>
         </form>
     </div>
