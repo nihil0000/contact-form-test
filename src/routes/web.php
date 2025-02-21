@@ -15,47 +15,32 @@ use App\Http\Controllers\AuthController;
 |
 */
 
-/**
- * index
- */
+// Index
 Route::get('/', [ContactController::class, 'index'])->name('index');
 
-/**
- * register
- */
-Route::get('/register', function () {
-    return view('register');
-})->name('register'); // registre page
-Route::post('register', [AuthController::class, 'register']); // register action
 
-/**
- * login
- */
-Route::get('/login', function () {
-    return view('login');
-})->name('login'); // login page
-Route::post('/login', [AuthController::class, 'login']); // login action
+// Authentication
+Route::controller(AuthController::class)->group(function () {
+    Route::get('/login', 'showLoginForm')->name('login');      // Login form
+    Route::post('/login', 'login');                            // User login
+    Route::get('/register', 'showRegisterForm')->name('register'); // Register Form
+    Route::post('/register', 'register');                      // User register
+    Route::post('/logout', 'logout')->name('logout');          // User logout
+});
 
-/**
- * admin
- * 未ログイン状態の場合、loginページに遷移する
- */
-Route::get('/admin', [ContactController::class, 'search'])->middleware('auth')->name('admin'); // admin page
-Route::delete('/admin', [ContactController::class, 'destroy']); // delete contact
-Route::get('/admin/export', [ContactController::class, 'export'])->name('admin.export'); // export csv
 
-/**
- * logout
- */
-Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+// Admin routes (Protected by auth)
+Route::middleware('auth')->prefix('admin')->name('admin')->group(function () {
+    Route::get('/', [ContactController::class, 'search']);
+    Route::delete('/{contact}', [ContactController::class, 'destroy'])->name('.destroy');
+    Route::get('/export', [ContactController::class, 'export'])->name('.export');
+});
 
-/**
- * confirm
- */
+
+// Confirmation
 Route::post('/confirm', [ContactController::class, 'confirm'])->name('confirm');
 Route::post('/edit', [ContactController::class, 'edit'])->name('edit');
 
-/**
- * thanks
- */
+
+// Thanks
 Route::post('/thanks', [ContactController::class, 'store'])->name('thanks');

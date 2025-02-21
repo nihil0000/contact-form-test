@@ -11,53 +11,84 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
-    /*
-    create user
-    */
+    // Show register form.
+    public function showRegisterForm()
+    {
+        return view('register');
+    }
+
+    /**
+     * Handles user registration.
+     *
+     * - Receives validated request data to create a new user.
+     * - Hashes the password before saving the user to the database.
+     * - Login the newly registered user and redirects to the admin page.
+     *
+     * @param   \App\Http\Requests\RegisterRequest　　$request　　The validated registration request.
+     * @return  \Illuminate\Http\RedirectResponse           　　Redirects to the admin dashboard upon successful registration.
+     */
     public function register(RegisterRequest $request)
     {
-        // create user, hash password
+        // Create user and hash the password
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
 
-        // login
+        // Login the user
         Auth::login($user);
 
-        // redirect admin page
+        // Redirect to the admin dashboard
         return redirect()->route('admin');
     }
 
-    /*
-    login
-    */
+    // Show login form.
+    public function showLoginForm()
+    {
+        return view('login');
+    }
+
+    /**
+     * Logs in the user with validated credentials.
+     *
+     * Validates the login request, attempts authentication, regenerates the session on success,
+     * and redirects to the intended page or the admin page. On failure, returns with an error message.
+     *
+     * @param   \App\Http\Requests\LoginRequest  $request  The login request with validated credentials.
+     * @return  \Illuminate\Http\RedirectResponse          Redirects on success or returns with errors on failure.
+     */
     public function login(LoginRequest $request)
     {
-        // validation (required email, pass)
+        // Validate email and password
         $credentials = $request->validated();
 
-        // auth
+        // Attempt authentication
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate(); // セッション固定攻撃対策
-            return redirect()->intended('/admin'); // redirect admin page
+            return redirect()->intended('admin'); // redirect admin page
         }
 
-        // login failed
+        // Authentication failed
         return back()->withErrors([
             'email' => 'ログイン情報が正しくありません。'
         ]);
     }
 
-    /*
-    logout
-    */
+    /**
+     * Logs out the authenticated user.
+     *
+     * Logs out the user, invalidates the session, regenerates the CSRF token,
+     * and redirects to the login page.
+     *
+     * @param  \Illuminate\Http\Request  $request  The logout request.
+     * @return \Illuminate\Http\RedirectResponse   Redirects to the login page.
+     */
     public function logout(Request $request)
     {
-        Auth::logout(); // logout
-        $request->session()->invalidate(); // delete session
-        $request->session()->regenerateToken(); // regenerate csrf token
-        return redirect('/login'); // redirect login page
+        Auth::logout(); // Log out the user
+        $request->session()->invalidate(); // Invalidate the session
+        $request->session()->regenerateToken(); // Regenerate CSRF token
+        return redirect('login'); // Redirect to login page
     }
 }
