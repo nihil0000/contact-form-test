@@ -74,11 +74,11 @@
                 @foreach ($contacts as $contact)
                 <tr>
                     <td>{{ $contact['last_name'] . ' '  .$contact['first_name'] }}</td>
-                    <td>{{ $contact['gender'] }}</td>
+                    <td>{{ config('genders')[$contact['gender']] }}</td>
                     <td>{{ $contact['email'] }}</td>
                     <td>{{ $categories[$contact['category_id']] }}</td>
                     <td>
-                        <a href="#modal-{{ $contact['id'] }}" class="detail-btn">詳細</a>
+                        <a href="#{{ $contact->id }}" class="detail-btn">詳細</a>
                     </td>
                 </tr>
                 @endforeach
@@ -87,9 +87,9 @@
 
         <!-- modal -->
         @foreach ($contacts as $contact)
-        <div id="modal-{{ $contact['id'] }}" class="modal">
+        <div id="{{ $contact->id }}" class="modal">
             <div class="modal-content">
-                <a href="{{ route('admin') }}" class="close-btn">&times;</a>
+                <a href="#!" class="close-btn">&times;</a>
 
                 <!-- modal table -->
                 <table class="modal-table">
@@ -99,7 +99,7 @@
                     </tr>
                     <tr>
                         <th>性別</th>
-                        <td>{{ $contact['gender'] }}</td>
+                        <td>{{ config('genders')[$contact['gender']] }}</td>
                     </tr>
                     <tr>
                         <th>メールアドレス</th>
@@ -128,7 +128,7 @@
                 </table>
 
                 <!-- delete button -->
-                <form action="{{ route('admin') }}" class="delete-form" method="post">
+                <form action="{{ route('admin.destroy', ['contact' => $contact->id]) }}" class="delete-form" method="post">
                     @method('delete')
                     @csrf
                     <div class="delete-btn">

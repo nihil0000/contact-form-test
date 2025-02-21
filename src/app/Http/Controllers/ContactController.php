@@ -45,7 +45,7 @@ class ContactController extends Controller
     // search contact content
     public function search(Request $request)
     {
-        $categories = Category::pluck('id', 'content');
+        $categories = Category::pluck('content', 'id');
 
         // 検索クエリを適用
         $contacts = Contact::query()
@@ -59,11 +59,11 @@ class ContactController extends Controller
     }
 
     // delete contact content
-    public function destroy(Request $request)
+    public function destroy(Contact $contact)
     {
-        Contact::find($request->id)->delete();
+        $contact->delete();
 
-        return redirect('admin');
+        return redirect(route('admin'));
     }
 
     // export contact content

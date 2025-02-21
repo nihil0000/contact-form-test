@@ -133,7 +133,7 @@
             </table>
 
             <div class="button__wrapper">
-                <button class="submit-btn">送信</button>
+                <button type="submit" class="submit-btn">送信</button>
 
                 <button type="submit" class="edit-btn" formaction="{{ route('edit') }}">修正</button>
             </div>
