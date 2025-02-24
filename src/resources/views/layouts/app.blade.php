@@ -22,7 +22,7 @@
     <header class="header">
         <div class="header__inner">
             <p class="header__inner-title">FashionnablyLate</p>
-            <div class="header__nav">
+            <nav class="header__nav">
                 @if (Request::is('admin'))
                     <!-- /admin の場合: ログアウトボタン -->
                     <a href="{{ route('logout') }}" class="header__button" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">logout</a>
@@ -38,7 +38,7 @@
                     <!-- /login の場合: 新規登録ボタン -->
                     <a href="{{ route('register') }}" class="header__button">register</a>
                 @endif
-            </div>
+            </nav>
         </div>
     </header>
 

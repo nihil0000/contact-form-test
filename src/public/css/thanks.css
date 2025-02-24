@@ -1,0 +1,35 @@
+header {
+    display: none;
+}
+
+.thanks {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.thanks-ttl {
+    text-align: center;
+    margin: 0;
+}
+
+.thanks-bg-txt {
+    position: absolute;
+    font-size: 25vh;
+    font-weight: normal;
+    color: rgba(0, 0, 0, 0.05);
+    z-index: -1;
+}
+
+input {
+    display: block;
+    margin: 40px auto 0px;
+    padding: 7px 30px;
+    background: #82756A;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}

@@ -1,10 +1,13 @@
+.contact {
+    height: calc(100vh - 140px);
+}
+
 .contact__title {
-    margin: 40px 0;
+    margin: 30px 0;
     text-align: center;
     font-size: 30px;
 }
 
-/* form common */
 .contact__form {
     margin: 0 auto;
     max-width: 1230px;
@@ -15,6 +18,8 @@
     width: 70%;
 }
 
+
+/* form common */
 .form__group {
     display: flex;
     justify-content: space-between;
@@ -26,36 +31,51 @@
 }
 
 .form__group-item {
+    display: flex;
+    justify-content: space-between;
     width: 60%;
 }
 
-.form__group-item input, select, textarea{
+.form__group-item input {
     padding: 10px;
     border: none;
     background: #f4f4f4;
-    color: #BEB1A6;
+    color: #5f5852;
 }
 
 /* .tel-input inputに関しては、このスタイルを適応しない */
-input:not(.tel-input input)::placeholder, textarea::placeholder {
-    padding-left: 1em;
-    color: #BEB1A6;
+input::placeholder,
+textarea::placeholder {
+color: #7c736b;
 }
+
+input:-webkit-autofill {
+    -webkit-text-fill-color: #7c736b; /* オートフィル時のテキスト色を制御 */
+    -webkit-box-shadow: 0 0 0px 1000px #f4f4f4 inset; /* オートフィル時の背景色を制御 */
+}
+
+.form__error-msg {
+    margin: 5px 0;
+    color: red;
+    font-size: 16px;
+}
+
 
 /* name */
-.name-input__inner {
+.name-input__wrapper {
     display: flex;
-    justify-content: space-between;
-}
-
-.name-input {
+    flex-direction: column;
     width: 45%;
 }
 
-/* sex */
+.form__error {
+    display: inline-block;
+}
+
+
+/* gender */
 .radio-group {
     display: flex;
-    align-items: center;
     padding-left: 10px;
 }
 
@@ -63,7 +83,12 @@ input:not(.tel-input input)::placeholder, textarea::placeholder {
     display: none;
 }
 
+.gender-radio__wrapper {
+    width: 60%;
+}
+
 .radio-mark {
+    margin-right: 5px;
     display: inline-block;
     border: 2px solid #8B7969;
     border-radius: 50%;
@@ -71,26 +96,38 @@ input:not(.tel-input input)::placeholder, textarea::placeholder {
     height: 16px;
 }
 
-.radio-group input:checked + .radio-mark{
+.radio-group input:checked + label .radio-mark{
     background: #8B7969;
     border-color: #8B7969;
 }
 
 .radio-group label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
     padding: 0 50px 0 5px;
 }
 
+
 /* email */
-.email-input {
-    width: 100%;
+.email-input__wrapper {
+    width: 60%;
 }
 
-.email-input:-webkit-autofill {
-    -webkit-text-fill-color: #BEB1A6; /* フォーム内のテキストの色を固定 */
-    -webkit-box-shadow: 0 0 0px 1000px #f4f4f4 inset;
+.email-input input {
+    padding: 10px;
+    width: 100%;
+    border: none;
+    background: #f4f4f4;
+    color: #7c736b;
 }
+
 
 /* tel */
+.tel-input__wrapper {
+    width: 60%;
+}
+
 .tel-input {
     display: flex;
     justify-content: space-between;
@@ -98,21 +135,43 @@ input:not(.tel-input input)::placeholder, textarea::placeholder {
 }
 
 .tel-input input {
+    padding: 10px;
+    width: 30%;
     text-align: center;
-    color: #BEB1A6;
+    color: #7c736b;
+    background: #f4f4f4;
+    border: none;
+}
+
+.tel-input input::placeholder {
+    color: a5998f;
 }
 
 /* address */
-.address-input {
-    width: 100%;
+.address-input__wrapper {
+    width: 60%;
 }
+
+.address-input input {
+    padding: 10px;
+    width: 100%;
+    color: #7c736b;
+    background: #f4f4f4;
+    border: none;
+}
+
 
 /* building name */
 .building-name-input {
     width: 100%;
 }
 
+
 /* contact type */
+.contact-type-select__wrapper {
+    width: 60%;
+}
+
 .custom-select {
     position: relative;
     display: inline-block;
@@ -120,10 +179,21 @@ input:not(.tel-input input)::placeholder, textarea::placeholder {
 }
 
 .contact-type-select {
-    padding-left: 1.5em;
+    padding: 10px;
     width: 100%;
-    color: #d9d0c9;
     appearance: none;
+    border: none;
+    background: #f4f4f4;
+}
+
+/* text color when not selected */
+.contact-type-select:invalid {
+    color: #b7b0ac;
+}
+
+/* text color when selected */
+.contact-type-select:valid {
+    color: #48433e;
 }
 
 /* ▼ toggle button */
@@ -138,18 +208,34 @@ input:not(.tel-input input)::placeholder, textarea::placeholder {
     pointer-events: none; /* クリックを select に通す */
 }
 
+
 /* contact content */
-.contact-content-input {
-    width: 100%;
-    min-height: 100px;
+.detail-form-input__wrapper {
+    width: 60%;
 }
+
+.detail-input {
+    width: 100%;
+    height: 100px;
+}
+
+.detail-input textarea {
+    padding: 10px;
+    width: 100%;;
+    height: 100%;
+    border: none;
+    background: #f4f4f4;
+    color: #48433e;
+}
+
 
 /* confirm button */
 .confirm-button {
     display: block;
-    margin: 0 auto;
+    margin: 0 auto 30px;
     padding: 7px 30px;
     background: #82756A;
     color: #fff;
     border: none;
+    cursor: pointer;
 }

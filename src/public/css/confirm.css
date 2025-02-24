@@ -1,0 +1,93 @@
+.confirm {
+    height: calc(100vh - 140px);
+}
+
+.confirm__title {
+    margin: 30px 0;
+    text-align: center;
+    font-size: 30px;
+}
+
+.contact-form__container {
+    margin: 0 auto;
+    max-width: 1230px;
+}
+
+.form__body {
+    margin: 0 auto;
+    width: 70%;
+}
+
+.confirm-table {
+    margin: 0 auto;
+    width: 100%;
+    border: 1px solid #d5cec9;
+;
+}
+
+tr:not(tr:last-of-type) {
+    border-bottom: 1px solid #d5cec9;
+}
+
+th {
+    padding: 0;
+    width: 30%;
+    font-weight: normal;
+}
+
+.form__group-label {
+    padding: 20px 30px;
+    background: #8B7969;
+    color: #fff;
+    text-align: left;
+}
+
+td {
+    width: 70%;
+}
+
+input {
+    border: none;
+}
+
+.form__group-item input {
+    padding: 20px 30px;
+    width: 100%;
+    outline: none;
+    font-family: "Roboto Slab", serif;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 16px;
+    color: #63574e;
+}
+
+.button__wrapper {
+    margin: 30px auto;
+    display: flex;
+    justify-content: center;
+}
+
+/* submit button */
+.submit-btn {
+    margin-right: 10px;
+    padding: 7px 30px;
+    background: #82756A;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* edit button */
+.edit-btn {
+    margin-left: 10px;
+    padding: 7px 30px;
+    color: #63574e;
+    border: none;
+    background: none;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+
