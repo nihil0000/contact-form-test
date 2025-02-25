@@ -7,6 +7,7 @@
 2. `docker compose up -d --build`
 
 ＊MySQLはOSによって起動しない場合があるため、それぞれのOSに合わせてdocker-compose.ymlファイルを編集してください
+
 ＊開発環境がMacOS (Appleチップ) のため、MySQLにて`platform: linux/amd64`を指定しています
 
 ### Laravel開発環境
