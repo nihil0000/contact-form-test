@@ -63,7 +63,7 @@ class AuthController extends Controller
         // Attempt authentication
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate(); // Prevent session fixation attacks
-            return redirect()->intended('admin'); // Redirect admin page
+            return redirect()->intended(route('admin.index')); // Redirect admin page
         }
 
         // Authentication failed

@@ -30,10 +30,10 @@ Route::controller(AuthController::class)->group(function () {
 
 
 // Admin routes (Protected by auth)
-Route::middleware('auth')->prefix('admin')->name('admin')->group(function () {
-    Route::get('/', [ContactController::class, 'search']);
-    Route::delete('/{contact}', [ContactController::class, 'destroy'])->name('.destroy');
-    Route::get('/export', [ContactController::class, 'export'])->name('.export');
+Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/', [ContactController::class, 'search'])->name('index');
+    Route::delete('/{contact}', [ContactController::class, 'destroy'])->name('destroy');
+    Route::get('/export', [ContactController::class, 'export'])->name('export');
 });
 
 

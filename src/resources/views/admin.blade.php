@@ -11,7 +11,7 @@
     <section class="search-container">
         <!-- search function -->
         <div class="search-function__wrapper">
-            <form action="{{ route('admin') }}" class="search-form" method="get">
+            <form action="{{ route('admin.index') }}" class="search-form" method="get">
                 @csrf
 
                 <!-- input to search name or email -->
@@ -45,7 +45,7 @@
                 </div>
 
                 <button type="submit" class="search-btn">検索</button>
-                <input type="button" class="reset-btn" value="リセット" onclick="location.href='{{ route('admin') }}'">
+                <input type="button" class="reset-btn" value="リセット" onclick="location.href='{{ route('admin.index') }}'">
             </form>
         </div>
 
