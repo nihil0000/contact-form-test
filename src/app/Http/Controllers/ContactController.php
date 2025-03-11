@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Response;
 use App\Http\Requests\ContactRequest;
 use App\Models\Category;
 use App\Models\Contact;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class ContactController extends Controller
 {
@@ -27,7 +28,7 @@ class ContactController extends Controller
     }
 
     // edit contact content
-    public function edit(Request $request)
+    public function edit()
     {
         return redirect()->route('index')->withInput();
     }
@@ -35,12 +36,22 @@ class ContactController extends Controller
     // store contact content
     public function store(Request $request)
     {
-        $contacts = $request->all();
-
         // Format telephone number as 'xxx-xxxx-xxxx'
-        $contacts['tel'] = $contacts['tel_area_code'] . '-' . $contacts['tel_city_code'] . '-' . $contacts['tel_subscriber'];
+        $request['tel'] = $request->tel_area_code . '-' . $request->tel_city_code . '-' . $request->tel_subscriber;
 
-        Contact::create($contacts);
+        Contact::create(
+            $request->only([
+                'category_id',
+                'first_name',
+                'last_name',
+                'gender',
+                'email',
+                'tel',
+                'address',
+                'building',
+                'detail',
+            ])
+            );
 
         return view('thanks');
     }
@@ -78,45 +89,36 @@ class ContactController extends Controller
             ->filterByGender($request->gender)
             ->filterByCategory($request->contact_type)
             ->filterByDate($request->contact_date)
-            ->get(); // 全件取得
+            ->cursor();
 
         // CSVヘッダー
         $csvHeader = [
             'お名前', '性別', 'メールアドレス', '電話番号', '住所', '建物名', 'お問い合わせの種類', 'お問い合わせの内容'
         ];
 
-        // データ行を作成
-        $csvData = $contacts->map(function ($contact) {
-            return [
-                $contact->last_name . ' ' . $contact->first_name,
-                $contact->gender == 1 ? '男性' : ($contact->gender == 2 ? '女性' : 'その他'),
-                $contact->email,
-                $contact->tel,
-                $contact->address,
-                $contact->building,
-                $contact->category->content, // カテゴリ名
-                $contact->detail,
-            ];
-        });
-
         // CSVを作成
         $filename = 'contacts_export_' . now()->format('Ymd_His') . '.csv';
-        $handle = fopen('php://output', 'w');
-        ob_start();
 
-        // ヘッダーを書き込み
-        fputcsv($handle, $csvHeader);
+        return new StreamedResponse(function () use ($csvHeader, $contacts) {
+            $handle = fopen('php://output', 'w');
+            fputcsv($handle, $csvHeader);
 
-        // データを書き込み
-        foreach ($csvData as $row) {
-            fputcsv($handle, $row);
-        }
+            foreach ($contacts as $contact) {
+                fputcsv($handle, [
+                    $contact->last_name . ' ' . $contact->first_name,
+                    $contact->gender == 1 ? '男性' : ($contact->gender == 2 ? '女性' : 'その他'),
+                    $contact->email,
+                    $contact->tel,
+                    $contact->address,
+                    $contact->building,
+                    $contact->category->content, // カテゴリ名
+                    $contact->detail,
+                ]);
+            }
 
-        fclose($handle);
-        $csv = ob_get_clean();
-
-        return Response::make($csv, 200, [
-            'Content-Type' => 'text/csv',
+            fclose($handle);
+        }, 200, [
+            'Content-Type' => 'text/csv; charset=Shift_JIS',
             'Content-Disposition' => "attachment; filename=$filename",
         ]);
     }

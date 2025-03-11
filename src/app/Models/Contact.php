@@ -30,7 +30,11 @@ class Contact extends Model
     }
 
     /**
-     * 名前・メールアドレス検索スコープ
+     * Scope to search by name or email based on keyword
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param string|null $keyword Search keyword
+     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeSearchByNameOrEmail($query, $keyword)
     {
